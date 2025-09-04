@@ -7,16 +7,16 @@ A collection of Python scripts for processing star trail photography images.
 ### Polaris Alignment Comparison
 Before alignment (notice Polaris movement):
 
-![Before Polaris Alignment](figures/beforeAlignPolaris.jpg)
+<img src="figures/beforeAlignPolaris.jpg" alt="Before Polaris Alignment" width="600">
 
 After alignment (Polaris fixed in center):
 
-![After Polaris Alignment](figures/afterAlignPolaris.png)
+<img src="figures/afterAlignPolaris.png" alt="After Polaris Alignment" width="600">
 
 ### Animated Star Trail
 Example output from the GIF creation script:
 
-![Star Trail Animation](figures/startrail_small.gif)
+<img src="figures/startrail_small.gif" alt="Star Trail Animation" width="600">
 
 ## Scripts
 
@@ -64,22 +64,49 @@ pip install -r requirements.txt
 
 1. Get an API key from https://nova.astrometry.net
 2. Edit the script to set your `ASTROMETRY_API_KEY`
-3. Place your RAW/JPEG/PNG/TIFF/FITS files in the `frames_in/` directory
+3. Prepare your input directory structure:
+   
+   **Input folder structure:**
+   ```
+   frames_in/
+   ├── IMG_0001.jpg
+   ├── IMG_0002.jpg
+   ├── IMG_0003.jpg
+   └── ...
+   ```
+   
+   Supported formats: RAW (.CR2, .NEF, .ARW, etc.), JPEG, PNG, TIFF, FITS
+
 4. Run the script:
 
 ```bash
 python alignPolaris.py
 ```
 
-Output files:
-- `frames_aligned/` - Aligned 16-bit PNG frames
+**Output files:**
+- `frames_aligned/` - Aligned 16-bit PNG frames (compatible with StarStaX software)
 - `frames_bad/` - Low-score frames (for inspection)
 - `polar_align_log.csv` - Detailed alignment metrics
 
 ### cumulative2gif.py
 
-1. Edit the script to configure your input pattern and settings
-2. Run the script:
+1. Prepare your input directory with processed star trail images:
+   
+   **Input folder structure:**
+   ```
+   cumulative/             # Output from StarStaX software (required)
+   ├── cumulative_001.png  # Progressive star trail images
+   ├── cumulative_002.png  # from StarStaX stacking process
+   ├── cumulative_003.png
+   └── ...
+   ```
+   
+   Supported formats: PNG, JPEG, TIFF
+   
+   **Note:** This script requires cumulative images from StarStaX, not individual aligned frames.
+
+2. Edit the script to configure your input pattern and settings
+3. Run the script:
 
 ```bash
 python cumulative2gif.py
